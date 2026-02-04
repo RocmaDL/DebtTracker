@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 import { AppProvider } from './src/context/AppContext';
+import { AuthProvider } from './src/context/AuthContext';
 import AppNavigator from './src/navigation/AppNavigator';
 import { StatusBar } from 'expo-status-bar';
 import { TrendingUp } from 'lucide-react-native';
@@ -57,9 +58,11 @@ export default function App() {
   }
 
   return (
-    <AppProvider>
-      <StatusBar style="auto" />
-      <AppNavigator />
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <StatusBar style="auto" />
+        <AppNavigator />
+      </AppProvider>
+    </AuthProvider>
   );
 }

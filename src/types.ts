@@ -21,6 +21,35 @@ export interface UserSettings {
   enableNotifications?: boolean;
 }
 
+export interface UserProfile {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL?: string;
+}
+
+export interface Group {
+  id: string;
+  name: string;
+  type: 'friends' | 'family' | 'couple' | 'other';
+  inviteCode: string;
+  members: string[]; // array of user UIDs
+  createdAt: number;
+  createdBy: string;
+}
+
+export interface GroupActivity {
+  id: string;
+  groupId: string;
+  userId: string;
+  userName: string;
+  type: 'expense' | 'sport';
+  amount: number;
+  description: string;
+  date: string; // ISO
+  timestamp: number;
+}
+
 export interface MonthData {
   accumulatedDebt: number;
   totalDebtForMonth: number;

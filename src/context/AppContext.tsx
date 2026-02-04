@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Transaction, UserSettings, MonthData } from '../types';
 import { calculateMonthData, getMonthKey } from '../utils/helpers';
 import { NotificationService } from '../services/NotificationService';
+import { GroupService } from '../services/GroupService';
 
 const STORAGE_KEY_DATA = 'debt_tracker_data_v1';
 const STORAGE_KEY_SETTINGS = 'debt_tracker_settings_v1';
@@ -84,6 +85,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Actions
   const addTransaction = (t: Transaction) => {
     setTransactions(prev => [...prev, t]);
+
+    // Sync to groups in background
+    GroupService.fetchUserGroups().then(groups => {
+      if (groups.length > 0) {
+        GroupService.logActivityToGroups(groups, t);
+      }
+    });
   };
 
   const updateTransaction = (t: Transaction) => {
