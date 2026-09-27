@@ -1,18 +1,16 @@
 "use client";
 
-import { Database, ExternalLink, FileText, RotateCcw, Sparkles, Trash2 } from "lucide-react";
-import { GithubIcon } from "../../ui/github-icon";
+import { Database, RotateCcw, Sparkles, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { LIMITS } from "@/lib/catalog";
 import { useApp } from "@/lib/store";
 import type { Weekday } from "@/lib/types";
-import { cn } from "@/lib/utils";
 import { Button } from "../../ui/button";
 import { Field, inputClass } from "../../ui/field";
 import { Sheet } from "../../ui/sheet";
 import { RangeField, ScheduleEditor } from "../onboarding";
-import { REPO_URL } from "@/lib/site";
+import { AUTHOR } from "@/lib/site";
 
 type Confirm = "demo" | "wipe" | null;
 
@@ -25,8 +23,6 @@ export function SettingsView() {
   const startFresh = useApp((s) => s.startFresh);
   const replay = useApp((s) => s.replayOnboarding);
   const [confirm, setConfirm] = useState<Confirm>(null);
-
-  const bytes = typeof window !== "undefined" ? (localStorage.getItem("debttracker:v1")?.length ?? 0) : 0;
 
   const toggleDay = (day: Weekday) => {
     const exists = settings.schedule.some((s) => s.day === day);
@@ -91,8 +87,7 @@ export function SettingsView() {
             <div className="text-sm">
               <p className="font-medium">{mode === "demo" ? "Tu explores le jeu de démo" : "Tu utilises tes propres données"}</p>
               <p className="mt-1 text-fg-muted">
-                {entries.length} entrées · {(bytes / 1024).toFixed(1)} Ko dans le <code className="font-mono text-xs">localStorage</code> de ce navigateur. Aucune
-                donnée n’est envoyée à un serveur.
+                {entries.length} entrées, enregistrées uniquement sur cet appareil. Rien n’est partagé, rien n’est envoyé.
               </p>
             </div>
           </div>
@@ -111,17 +106,12 @@ export function SettingsView() {
 
         <Section title="À propos" id="a-propos">
           <p className="text-sm text-fg-muted">
-            DebtTracker est un <strong className="text-fg">projet vitrine</strong> conçu et développé par Rocma Dimba-Lau : pas de
-            backend, pas de compte, uniquement Next.js, TypeScript et votre navigateur.
+            DebtTracker est un <strong className="text-fg">projet vitrine</strong> imaginé et conçu par {AUTHOR}. Les données de
+            démonstration sont fictives : explore, casse tout, recommence.
           </p>
-          <div className="flex flex-wrap gap-2">
-            <a href={REPO_URL} target="_blank" rel="noreferrer" className={linkClass}>
-              <GithubIcon className="size-4" /> Code source <ExternalLink className="size-3 opacity-60" />
-            </a>
-            <a href={`${REPO_URL}/blob/main/docs/USER_STORIES.md`} target="_blank" rel="noreferrer" className={linkClass}>
-              <FileText className="size-4" /> User stories <ExternalLink className="size-3 opacity-60" />
-            </a>
-          </div>
+          <p className="text-sm text-fg-muted">
+            L’idée est simple : transformer la culpabilité d’un écart en un objectif clair, mesurable et atteignable.
+          </p>
         </Section>
       </div>
 
@@ -133,7 +123,7 @@ export function SettingsView() {
         description={
           confirm === "wipe"
             ? "Tes réglages sont conservés, mais l’historique, les badges et l’XP repartent de zéro."
-            : "Les entrées actuelles seront remplacées par 9 semaines de données fictives."
+            : "Les entrées actuelles seront remplacées par 16 semaines de données fictives."
         }
       >
         <div className="flex gap-3 pt-2">
@@ -160,9 +150,6 @@ export function SettingsView() {
   );
 }
 
-const linkClass = cn(
-  "inline-flex h-10 items-center gap-2 rounded-lg border border-white/8 bg-white/[0.03] px-3.5 text-sm font-medium transition hover:border-white/20 hover:bg-white/[0.06]",
-);
 
 function Section({ title, id, children }: { title: string; id: string; children: React.ReactNode }) {
   return (

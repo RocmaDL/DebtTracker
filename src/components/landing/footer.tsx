@@ -1,8 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { AUTHOR, REPO_URL } from "@/lib/site";
+import { AUTHOR } from "@/lib/site";
 import { buttonClass } from "../ui/button";
 import { Logo } from "../ui/logo";
+import { LineReveal } from "./motion";
 
 export function FinalCta() {
   return (
@@ -13,16 +14,14 @@ export function FinalCta() {
             Insert coin<span className="animate-blink motion-reduce:animate-none">_</span>
           </p>
           <h2 className="mt-6 text-[clamp(3rem,8vw,6.5rem)] leading-[0.9] font-semibold tracking-[-0.05em]">
-            Prêt à payer
-            <br />
-            ta dette ?
+            <LineReveal inView lines={[{ text: "Prêt à payer" }, { text: "ta dette ?" }]} />
           </h2>
         </div>
         <div className="lg:pb-3">
           <Link href="/app" className={buttonClass("primary", "lg", "group h-16 px-9 text-lg")}>
             Ouvrir la démo <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
           </Link>
-          <p className="mt-4 max-w-64 text-sm text-fg-subtle">9 semaines de données fictives, effaçables en un clic.</p>
+          <p className="mt-4 max-w-64 text-sm text-fg-subtle">16 semaines de données fictives, effaçables en un clic.</p>
         </div>
       </div>
     </section>
@@ -35,11 +34,8 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-8 text-sm text-fg-subtle sm:flex-row sm:items-center sm:gap-8 sm:px-6">
         <Logo />
         <p>
-          Conçu et développé par <span className="text-fg-muted">{AUTHOR}</span>. Données fictives, stockage local, aucun traceur.
+          Imaginé et conçu par <span className="text-fg-muted">{AUTHOR}</span>. Projet vitrine, données fictives.
         </p>
-        <a href={REPO_URL} target="_blank" rel="noreferrer" className="shrink-0 transition-colors hover:text-fg sm:ml-auto">
-          GitHub ↗
-        </a>
       </div>
     </footer>
   );

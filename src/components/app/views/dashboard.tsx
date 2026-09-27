@@ -4,14 +4,14 @@ import { AlertTriangle, ArrowDownRight, ArrowRight, ArrowUpRight, CalendarClock,
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useMemo } from "react";
-import { addDays, formatRelative, formatWeekday, formatDayMonth, capitalize } from "@/lib/dates";
+import { formatRelative, formatWeekday, formatDayMonth, capitalize } from "@/lib/dates";
 import { monthRange, summarize } from "@/lib/engine";
 import { BADGES } from "@/lib/gamification";
 import { useApp } from "@/lib/store";
 import { useUI } from "@/lib/ui-store";
 import { cn, formatDuration, formatEuro, plural } from "@/lib/utils";
 import { useDerived } from "@/hooks/use-derived";
-import { DebtChart } from "../../charts/debt-chart";
+import { ActivityHeatmap } from "../../charts/activity-heatmap";
 import { AnimatedNumber } from "../../ui/animated-number";
 import { Button } from "../../ui/button";
 import { ProgressRing } from "../../ui/progress-ring";
@@ -41,7 +41,6 @@ export function DashboardView() {
 
   const [from, to] = monthRange(d.today);
   const month = useMemo(() => summarize(d.entries, d.settings, from, to, d.today), [d.entries, d.settings, from, to, d.today]);
-  const last30 = useMemo(() => d.timeline.filter((p) => p.date > addDays(d.today, -30)), [d.timeline, d.today]);
   const recent = useMemo(() => [...d.entries].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt).slice(0, 5), [d.entries]);
   const nextBadge = BADGES.find((b) => !d.badges.has(b.id));
 
@@ -132,14 +131,14 @@ export function DashboardView() {
             )}
           </p>
 
-          <div className="relative mt-6 -mb-2">
-            {last30.length > 1 ? (
-              <DebtChart points={last30} height={150} />
-            ) : (
-              <p className="rounded-xl border border-dashed border-white/10 p-6 text-center text-sm text-fg-subtle">
-                L’évolution de ta dette apparaîtra ici après tes premières entrées.
-              </p>
-            )}
+          <div className="hairline relative mt-7 border-t pt-5">
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="eyebrow">Ton activité</h3>
+              <Link href="/app/calendrier" className="text-xs font-medium text-fg-muted hover:text-fg">
+                Calendrier →
+              </Link>
+            </div>
+            <ActivityHeatmap entries={d.entries} today={d.today} standard={d.settings.standardDuration} onSelect={(date) => open({ type: "day", date })} />
           </div>
         </motion.section>
 

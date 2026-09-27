@@ -25,14 +25,14 @@ La dette ne descend jamais sous zéro : le sport ne se « stocke » pas pour exc
 ## Un projet vitrine
 
 - **Aucun backend, aucun compte** : l'état est géré par Zustand et persisté dans le `localStorage`.
-- **Démo vivante** : un jeu de 9 semaines de données fictives est généré *relativement à la date du jour*, pour que l'app paraisse toujours active.
+- **Démo vivante** : un jeu de 16 semaines de données fictives est généré *relativement à la date du jour*, pour que l'app paraisse toujours active.
 - Un bandeau permanent rappelle que les données sont fictives et locales. Réglages → *Recharger la démo* / *Partir de zéro*.
 
 ## Fonctionnalités
 
-- **Landing page** : tableau d'affichage LED animé, règle écrite comme une phrase, simulateur interactif, fiche technique, coulisses du projet.
+- **Landing page** : tableau d'affichage LED animé, titre révélé ligne par ligne, règle qui s'allume mot à mot au scroll, burger pixel qui se transforme en haltère, bandeau qui réagit à la vitesse du scroll, chrono vivant, simulateur interactif, manifeste. Aucune mention technique côté site.
 - **Onboarding** : explorer la démo en un clic, ou configurer taux, séance type et planning en 3 étapes.
-- **Tableau de bord** : dette actuelle, évolution sur 30 jours, prochaine séance recommandée, série, niveau.
+- **Tableau de bord** : dette actuelle, **ardoise d'activité façon graphe de contributions GitHub** (une case par jour, vert = effort, orange = écart), prochaine séance recommandée, série, niveau.
 - **Saisie express** : bouton `+` (ou touche `N`), aperçu de l'impact avant validation, annulation par toast.
 - **Chrono plein écran** : anneau de progression, survit au rechargement, réductible en pastille.
 - **Calendrier** : séances honorées, manquées, bonus, planifiées et écarts, avec le détail de chaque jour.

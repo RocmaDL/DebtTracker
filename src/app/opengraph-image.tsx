@@ -39,7 +39,7 @@ export default async function Image() {
             Debt<span style={{ color: "#d4ff3a" }}>Tracker</span>
           </div>
           <div style={{ marginLeft: "auto", fontSize: 20, padding: "8px 18px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", color: "#a3a9b3" }}>
-            Projet vitrine · Next.js
+            Projet vitrine
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>

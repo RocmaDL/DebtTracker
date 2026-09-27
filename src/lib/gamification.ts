@@ -143,18 +143,18 @@ export const BADGES: Badge[] = [
     test: (c) => c.timeline.reduce((s, p) => s + p.effectiveRepaid, 0) >= 300,
   },
   {
-    id: "sessions-30",
+    id: "sessions-50",
     name: "Habitué",
-    description: "Enregistrer 30 séances.",
+    description: "Enregistrer 50 séances.",
     icon: "repeat",
-    test: (c) => sessionsOf(c).length >= 30,
+    test: (c) => sessionsOf(c).length >= 50,
   },
   {
-    id: "minutes-3000",
-    name: "3 000 minutes",
-    description: "Cumuler 3 000 minutes de sport.",
+    id: "minutes-5000",
+    name: "5 000 minutes",
+    description: "Cumuler 5 000 minutes de sport.",
     icon: "hourglass",
-    test: (c) => sessionsOf(c).reduce((s, e) => s + e.duration, 0) >= 3000,
+    test: (c) => sessionsOf(c).reduce((s, e) => s + e.duration, 0) >= 5000,
   },
   {
     id: "clean-week",
@@ -171,11 +171,11 @@ export const BADGES: Badge[] = [
     test: (c) => new Set(sessionsOf(c).map((s) => s.activity)).size >= 3,
   },
   {
-    id: "level-5",
-    name: "Cinq étoiles",
-    description: "Atteindre le niveau 5.",
+    id: "level-6",
+    name: "Poids lourd",
+    description: "Atteindre le niveau 6.",
     icon: "crown",
-    test: (c) => c.level.level >= 5,
+    test: (c) => c.level.level >= 6,
   },
 ];
 
