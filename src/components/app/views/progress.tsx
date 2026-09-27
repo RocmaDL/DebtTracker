@@ -9,6 +9,7 @@ import { isExpense, isSession, spendingByCategory, weeklyMinutes } from "@/lib/e
 import { BADGES, LEVELS } from "@/lib/gamification";
 import { cn, formatDuration, formatEuro, formatInt } from "@/lib/utils";
 import { useDerived } from "@/hooks/use-derived";
+import { DebtChart } from "../../charts/debt-chart";
 import { WeeklyBars } from "../../charts/weekly-bars";
 import { ProgressRing } from "../../ui/progress-ring";
 import { BadgeIcon } from "../badge-icon";
@@ -28,6 +29,7 @@ export function ProgressView() {
       repaid: d.timeline.reduce((s, p) => s + p.effectiveRepaid, 0),
     };
   }, [d.entries, d.timeline]);
+  const debt60 = useMemo(() => d.timeline.filter((p) => p.date > addDays(d.today, -60)), [d.timeline, d.today]);
   const weeklyTarget = d.settings.schedule.length * d.settings.standardDuration;
   const maxCat = Math.max(1, ...categories.map((c) => c.amount));
 
@@ -102,6 +104,18 @@ export function ProgressView() {
           </dl>
         </section>
       </div>
+
+      <section className="card p-6" aria-labelledby="debt-evo">
+        <h2 id="debt-evo" className="eyebrow">
+          Évolution de la dette
+        </h2>
+        <p className="mt-1 mb-4 text-sm text-fg-muted">60 derniers jours · survole ou utilise les flèches pour lire chaque jour</p>
+        {debt60.length > 1 ? (
+          <DebtChart points={debt60} height={200} />
+        ) : (
+          <p className="rounded-xl border border-dashed border-white/10 p-6 text-center text-sm text-fg-subtle">La courbe apparaîtra après tes premières entrées.</p>
+        )}
+      </section>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-6">
         <section className="card p-6 lg:col-span-2" aria-labelledby="weekly">

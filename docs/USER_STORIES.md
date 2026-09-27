@@ -28,7 +28,7 @@
 | V-2 | En tant que visiteuse, je veux essayer l'app sans compte ni installation. | Un CTA « Lancer la démo » ouvre l'app avec un jeu de données réaliste, généré relativement à la date du jour. |
 | V-3 | En tant que visiteuse, je veux savoir que c'est un projet vitrine. | Un bandeau persistant « Mode démo · données stockées dans ce navigateur » est visible dans l'app ; la landing le mentionne dans une section dédiée. |
 | V-4 | En tant que visiteuse, je veux pouvoir tout remettre à zéro. | Réglages → « Recharger la démo » et « Partir de zéro », chacun avec confirmation. |
-| V-5 | En tant que recruteuse, je veux voir la démarche derrière le projet. | Section « Coulisses » : stack, choix UX, lien vers le code source et vers ces user stories. |
+| V-5 | En tant que recruteuse, je veux comprendre l’intention du projet. | Section « Manifeste » : les principes du produit, sans aucun jargon technique. |
 | V-6 | En tant que visiteuse sur mobile, je veux une expérience native. | Navigation par barre d'onglets en bas + bouton d'action central ; aucune barre de défilement horizontale à 360 px. |
 
 ## Épopée 1 — Onboarding

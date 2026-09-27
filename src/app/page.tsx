@@ -1,8 +1,8 @@
-import { Behind } from "@/components/landing/behind";
 import { Concept } from "@/components/landing/concept";
 import { Features } from "@/components/landing/features";
 import { FinalCta, SiteFooter } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
+import { Manifesto } from "@/components/landing/manifesto";
 import { Simulator } from "@/components/landing/simulator";
 import { SiteNav } from "@/components/landing/site-nav";
 import { Ticker } from "@/components/landing/ticker";
@@ -23,7 +23,7 @@ export default function Home() {
           <Simulator />
         </section>
         <Features />
-        <Behind />
+        <Manifesto />
         <FinalCta />
       </main>
       <SiteFooter />

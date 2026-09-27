@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * « tableau d’affichage de stade » de Geist Pixel. Une seule couleur
  * (currentColor) : ils remplacent les emojis, dont le rendu dépend de l’OS.
  */
-const SPRITES = {
+export const SPRITES = {
   burger: [
     "............",
     "...######...",

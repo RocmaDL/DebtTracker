@@ -112,7 +112,7 @@ function Welcome({ onDemo, onSetup }: { onDemo: () => void; onSetup: () => void 
           <span className="flex items-center gap-2">
             <Sparkles className="size-4" /> Explorer la démo
           </span>
-          <span className="text-xs font-normal opacity-70">9 semaines de données fictives · recommandé</span>
+          <span className="text-xs font-normal opacity-70">16 semaines de données fictives · recommandé</span>
         </Button>
         <Button size="lg" variant="secondary" onClick={onSetup} className="h-auto flex-col items-start gap-1 py-4 text-left whitespace-normal">
           <span className="flex items-center gap-2">
@@ -121,7 +121,7 @@ function Welcome({ onDemo, onSetup }: { onDemo: () => void; onSetup: () => void 
           <span className="text-xs font-normal text-fg-muted">Partir de zéro en 3 étapes</span>
         </Button>
       </div>
-      <p className="mt-5 text-xs text-fg-subtle">Tout reste dans ton navigateur (localStorage). Rien n’est envoyé nulle part.</p>
+      <p className="mt-5 text-xs text-fg-subtle">Tout reste sur ton appareil. Rien n’est envoyé nulle part.</p>
     </div>
   );
 }

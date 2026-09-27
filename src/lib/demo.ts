@@ -37,10 +37,10 @@ const NOTES: Partial<Record<ExpenseCategory, string[]>> = {
 const ACTIVITY_MIX: Activity[] = ["gym", "gym", "gym", "run", "run", "bike", "hiit", "swim"];
 
 /**
- * Génère ~9 semaines de données réalistes, datées relativement à `todayDate`
+ * Génère ~16 semaines de données réalistes, datées relativement à `todayDate`
  * pour que la démo paraisse toujours « vivante ».
  */
-export function generateDemo(todayDate: ISODate, weeks = 9): Entry[] {
+export function generateDemo(todayDate: ISODate, weeks = 16): Entry[] {
   const rand = mulberry32(42);
   const pick = <T,>(arr: readonly T[]) => arr[Math.floor(rand() * arr.length)];
   const s = DEMO_SETTINGS;
@@ -78,12 +78,15 @@ export function generateDemo(todayDate: ISODate, weeks = 9): Entry[] {
       balance += Math.round(amount * s.rate);
     }
 
-    // Séances planifiées : ~85 % d’assiduité, durée calée sur la dette.
+    // Séances planifiées : ~80 % d’assiduité, durée calée sur la dette.
+    // La démo ne solde jamais complètement la dette : le badge « Ardoise propre » reste à gagner en direct.
     const isSlot = scheduled.has(wd);
     const attends = lastSlots.includes(date) || (isSlot && rand() < 0.8);
     const extra = !isSlot && rand() < 0.05;
     if (attends || extra) {
-      const effort = Math.min(45, Math.ceil(balance / 2)) + Math.round((rand() - 0.4) * 10);
+      const noise = Math.round((rand() - 0.4) * 10);
+      const wanted = Math.min(45, Math.ceil(balance / 2)) + noise;
+      const effort = balance > 0 ? Math.min(wanted, balance - 1) : Math.min(wanted, 0);
       const duration = Math.max(35, s.standardDuration + effort);
       entries.push({
         id: id(),
