@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { today } from "@/lib/dates";
 
-/** Date du jour (locale), mise à jour si l'app reste ouverte après minuit. */
+/** Date du jour (locale), mise à jour si l’app reste ouverte après minuit. */
 export function useToday() {
   const [value, setValue] = useState(today);
   useEffect(() => {

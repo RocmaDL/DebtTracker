@@ -26,7 +26,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         offset={48}
         toastOptions={{
           classNames: {
-            toast: "!bg-ink-800/95 !backdrop-blur !border-white/10 !rounded-2xl !text-fg !shadow-2xl",
+            toast: "!bg-ink-800/95 !backdrop-blur !border-white/10 !rounded-xl !text-fg !shadow-2xl",
             description: "!text-fg-muted",
             actionButton: "!bg-volt !text-ink-950 !font-semibold !rounded-lg",
           },

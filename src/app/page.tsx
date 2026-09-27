@@ -3,7 +3,6 @@ import { Concept } from "@/components/landing/concept";
 import { Features } from "@/components/landing/features";
 import { FinalCta, SiteFooter } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
-import { Reveal } from "@/components/landing/reveal";
 import { Simulator } from "@/components/landing/simulator";
 import { SiteNav } from "@/components/landing/site-nav";
 import { Ticker } from "@/components/landing/ticker";
@@ -16,18 +15,12 @@ export default function Home() {
         <Hero />
         <Ticker />
         <Concept />
-        <section id="simulateur" className="scroll-mt-24 pb-8">
-          <div className="mx-auto max-w-6xl px-5 sm:px-6">
-            <Reveal className="mb-10 max-w-2xl">
-              <p className="eyebrow text-volt">Simulateur</p>
-              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.035em] text-balance sm:text-5xl">
-                Combien coûte ton week-end ?
-              </h2>
-            </Reveal>
-            <Reveal>
-              <Simulator />
-            </Reveal>
+        <section id="simulateur" className="mx-auto max-w-6xl scroll-mt-8 px-5 pb-28 sm:px-6 sm:pb-36">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <h2 className="text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Combien coûte ton week-end ?</h2>
+            <p className="max-w-xs text-sm text-fg-subtle">Compose ton panier, règle le taux : le plan se recalcule en direct.</p>
           </div>
+          <Simulator />
         </section>
         <Features />
         <Behind />

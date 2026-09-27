@@ -12,6 +12,7 @@ import { useDerived } from "@/hooks/use-derived";
 import { WeeklyBars } from "../../charts/weekly-bars";
 import { ProgressRing } from "../../ui/progress-ring";
 import { BadgeIcon } from "../badge-icon";
+import { PixelIcon, categoryIcon } from "@/components/ui/pixel-icon";
 
 export function ProgressView() {
   const d = useDerived();
@@ -40,7 +41,6 @@ export function ProgressView() {
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-6">
         {/* Niveau */}
         <section className="card overflow-hidden p-6 sm:p-8 lg:col-span-2" aria-labelledby="lvl">
-          <div className="pointer-events-none absolute -bottom-32 -left-20 size-80 rounded-full bg-volt/10 blur-3xl" />
           <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center">
             <ProgressRing value={d.level.progress} size={168} stroke={12} label="Progression dans le niveau">
               <div className="text-center">
@@ -75,9 +75,9 @@ export function ProgressView() {
             Série
           </h2>
           <div className="mt-4 flex items-end gap-3">
-            <Flame className={cn("mb-2 size-10", d.streaks.current > 0 ? "text-amber drop-shadow-[0_0_14px_rgb(255_181_71/0.6)]" : "text-fg-subtle")} />
+            <Flame className={cn("mb-2 size-10", d.streaks.current > 0 ? "text-amber" : "text-fg-subtle")} />
             <p className="text-6xl font-semibold tracking-[-0.04em]">{d.streaks.current}</p>
-            <p className="mb-2 text-sm text-fg-muted">{d.streaks.current > 1 ? "séances d'affilée" : "séance"}</p>
+            <p className="mb-2 text-sm text-fg-muted">{d.streaks.current > 1 ? "séances d’affilée" : "séance"}</p>
           </div>
           <p className="mt-3 text-sm text-fg-muted">
             Record : <strong className="text-fg">{d.streaks.best}</strong>. Seules les séances planifiées comptent ; une séance manquée remet le compteur à zéro.
@@ -148,14 +148,14 @@ export function ProgressView() {
           </h2>
           <p className="mt-1 mb-5 text-sm text-fg-muted">Dépenses par catégorie · 60 derniers jours</p>
           {categories.length === 0 ? (
-            <p className="text-sm text-fg-subtle">Aucun écart sur la période. 🥦</p>
+            <p className="text-sm text-fg-subtle">Aucun écart sur la période.</p>
           ) : (
             <ul className="space-y-4">
               {categories.map((c, i) => (
                 <li key={c.category}>
                   <div className="mb-1.5 flex items-baseline justify-between text-sm">
                     <span>
-                      <span aria-hidden>{CATEGORIES[c.category].emoji}</span> {CATEGORIES[c.category].label}
+                      <PixelIcon name={categoryIcon(c.category)} className="mr-1.5 inline size-4 align-[-2px] text-ember" /> {CATEGORIES[c.category].label}
                       <span className="ml-1.5 text-xs text-fg-subtle">×{c.count}</span>
                     </span>
                     <span className="font-mono text-xs tabular-nums">{formatEuro(c.amount)}</span>
@@ -197,8 +197,8 @@ export function ProgressView() {
               >
                 <span
                   className={cn(
-                    "grid size-12 place-items-center rounded-2xl",
-                    unlocked ? "bg-gradient-to-br from-amber to-ember text-ink-950 shadow-[0_8px_24px_-8px_rgb(255_181_71/0.6)]" : "border border-dashed border-white/12 text-fg-subtle",
+                    "grid size-12 place-items-center rounded-xl",
+                    unlocked ? "bg-amber text-ink-950" : "border border-dashed border-white/12 text-fg-subtle",
                   )}
                 >
                   {unlocked ? <BadgeIcon icon={b.icon} className="size-5" strokeWidth={2.2} /> : <Lock className="size-4" />}

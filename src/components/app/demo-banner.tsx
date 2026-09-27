@@ -18,7 +18,7 @@ export function DemoBanner() {
         <p className="min-w-0 truncate">
           <strong className="font-semibold text-fg">{mode === "demo" ? "Mode démo" : "Projet vitrine"}</strong>
           <span className="hidden sm:inline">
-            {" "}· {mode === "demo" ? "Données fictives, stockées" : "Vos données restent"} uniquement dans ce navigateur — aucun serveur, aucun compte.
+            {" "}· {mode === "demo" ? "Données fictives, stockées" : "Vos données restent"} uniquement dans ce navigateur. Aucun serveur, aucun compte.
           </span>
           <span className="sm:hidden"> · données locales uniquement</span>
         </p>

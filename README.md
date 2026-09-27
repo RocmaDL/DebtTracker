@@ -30,7 +30,7 @@ La dette ne descend jamais sous zéro : le sport ne se « stocke » pas pour exc
 
 ## Fonctionnalités
 
-- **Landing page** : hero animé, bandeau défilant façon tableau de stade, simulateur interactif, coulisses du projet.
+- **Landing page** : tableau d'affichage LED animé, règle écrite comme une phrase, simulateur interactif, fiche technique, coulisses du projet.
 - **Onboarding** : explorer la démo en un clic, ou configurer taux, séance type et planning en 3 étapes.
 - **Tableau de bord** : dette actuelle, évolution sur 30 jours, prochaine séance recommandée, série, niveau.
 - **Saisie express** : bouton `+` (ou touche `N`), aperçu de l'impact avant validation, annulation par toast.
@@ -42,9 +42,9 @@ La dette ne descend jamais sous zéro : le sport ne se « stocke » pas pour exc
 
 ## Direction artistique — « Night session »
 
-Noir profond, un vert **volt** `#D4FF3A` pour l'effort, un orange **ember** `#FF5B3A` pour la dette.
-Geist Sans pour lire, Geist Mono pour les libellés techniques, **Geist Pixel** pour l'esprit tableau d'affichage de stade (logo, chrono, numéros).
-Grain photographique discret, halos lumineux, micro-animations Motion.
+Le stade la nuit. Noir profond, un vert **volt** `#D4FF3A` pour l'effort, un orange **ember** `#FF5B3A` pour la dette, rien d'autre ne crie.
+Geist Sans pour lire, **Geist Pixel** pour le tableau d'affichage (hero LED qui rejoue le calcul, chrono, scores), 13 **pictogrammes pixel art dessinés à la main** à la place des emojis.
+Pas de dégradé, pas de halo, pas de bento : l'audit [`docs/AUDIT_AI_SLOP.md`](docs/AUDIT_AI_SLOP.md) détaille les 23 marqueurs « AI slop » relevés et comment chacun a été traité.
 
 ## Architecture
 

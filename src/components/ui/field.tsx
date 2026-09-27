@@ -33,7 +33,7 @@ export function Field({ label, htmlFor, hint, error, children, className, aside 
 }
 
 export const inputClass = cn(
-  "h-12 w-full rounded-2xl border border-white/8 bg-ink-800 px-4 text-base text-fg placeholder:text-fg-subtle",
+  "h-12 w-full rounded-xl border border-white/8 bg-ink-800 px-4 text-base text-fg placeholder:text-fg-subtle",
   "transition focus:border-volt/60 focus:bg-ink-750 focus:outline-none focus:ring-4 focus:ring-volt/10",
   "aria-[invalid=true]:border-ember/60 aria-[invalid=true]:ring-ember/10",
 );

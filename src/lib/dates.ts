@@ -7,7 +7,7 @@ export function toISODate(d: Date): ISODate {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
-/** Parse un `YYYY-MM-DD` en Date locale à midi (évite les pièges du changement d'heure). */
+/** Parse un `YYYY-MM-DD` en Date locale à midi (évite les pièges du changement d’heure). */
 export function fromISODate(s: ISODate): Date {
   const [y, m, d] = s.split("-").map(Number);
   return new Date(y, m - 1, d, 12);
@@ -76,10 +76,10 @@ export const formatShort = (s: ISODate) => shortDate.format(fromISODate(s));
 export const formatWeekday = (s: ISODate) => weekdayLong.format(fromISODate(s));
 export const formatMonth = (s: ISODate) => capitalize(monthYear.format(fromISODate(s)));
 
-/** « Aujourd'hui », « Hier », « Demain » ou « mardi 12 mars ». */
+/** « Aujourd’hui », « Hier », « Demain » ou « mardi 12 mars ». */
 export function formatRelative(s: ISODate, ref: ISODate): string {
   const diff = diffDays(s, ref);
-  if (diff === 0) return "Aujourd'hui";
+  if (diff === 0) return "Aujourd’hui";
   if (diff === -1) return "Hier";
   if (diff === 1) return "Demain";
   return capitalize(`${formatWeekday(s)} ${formatDayMonth(s)}`);

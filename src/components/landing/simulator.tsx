@@ -6,6 +6,7 @@ import { CATEGORIES, CATEGORY_KEYS } from "@/lib/catalog";
 import type { ExpenseCategory } from "@/lib/types";
 import { cn, formatEuro } from "@/lib/utils";
 import { AnimatedNumber } from "../ui/animated-number";
+import { PixelIcon, categoryIcon } from "@/components/ui/pixel-icon";
 
 /** Mini-calculateur : on compose son week-end, on voit la facture en minutes. */
 export function Simulator() {
@@ -32,13 +33,11 @@ export function Simulator() {
               <li
                 key={c}
                 className={cn(
-                  "flex items-center gap-2 rounded-2xl border p-2.5 transition",
+                  "flex items-center gap-2 rounded-xl border p-2.5 transition",
                   qty > 0 ? "border-ember/40 bg-ember/[0.07]" : "border-white/6 bg-ink-800/60",
                 )}
               >
-                <span className="text-2xl" aria-hidden>
-                  {CATEGORIES[c].emoji}
-                </span>
+                <PixelIcon name={categoryIcon(c)} className={cn("size-6", qty > 0 ? "text-ember" : "text-fg-subtle")} />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium">{CATEGORIES[c].label}</span>
                   <span className="block font-mono text-[10px] text-fg-subtle">{formatEuro(CATEGORIES[c].typical)}</span>
@@ -76,12 +75,11 @@ export function Simulator() {
       </div>
 
       <div className="hairline relative flex flex-col justify-between gap-8 overflow-hidden border-t bg-ink-900/70 p-6 sm:p-8 lg:border-t-0 lg:border-l" aria-live="polite">
-        <div className="pointer-events-none absolute -right-20 -bottom-20 size-72 rounded-full bg-volt/10 blur-3xl" />
         <div>
-          <p className="eyebrow">L&apos;addition</p>
+          <p className="eyebrow">L’addition</p>
           <p className="mt-3 text-sm text-fg-muted">{formatEuro(total)} de fast-food, soit</p>
           <p className="mt-1 flex items-baseline gap-2">
-            <AnimatedNumber value={minutes} duration={0.6} className="text-7xl font-semibold tracking-[-0.05em] text-ember" />
+            <AnimatedNumber value={minutes} duration={0.6} className="font-pixel text-8xl leading-none text-ember tabular-nums" />
             <span className="text-xl text-fg-muted">min de dette</span>
           </p>
         </div>
@@ -89,7 +87,7 @@ export function Simulator() {
           <p className="eyebrow">Ton plan</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {Array.from({ length: sessions }, (_, i) => (
-              <span key={i} className="rounded-xl border border-volt/25 bg-volt/[0.06] px-3 py-2 text-center">
+              <span key={i} className="rounded-lg border border-volt/25 bg-volt/[0.06] px-3 py-2 text-center">
                 <span className="block font-mono text-[10px] text-fg-subtle">S{i + 1}</span>
                 <span className="font-pixel text-base tabular-nums">{standard + perSession}′</span>
               </span>
@@ -100,7 +98,7 @@ export function Simulator() {
               "Rien à rembourser. Semaine exemplaire."
             ) : (
               <>
-                <strong className="text-fg">{perSession} min de plus</strong> à chacune de tes {sessions} prochaines séances, et l&apos;ardoise est effacée.
+                <strong className="text-fg">{perSession} min de plus</strong> à chacune de tes {sessions} prochaines séances, et l’ardoise est effacée.
               </>
             )}
           </p>

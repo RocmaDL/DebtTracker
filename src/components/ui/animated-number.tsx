@@ -10,7 +10,7 @@ interface AnimatedNumberProps {
   duration?: number;
 }
 
-/** Nombre qui « roule » jusqu'à sa nouvelle valeur. */
+/** Nombre qui « roule » jusqu’à sa nouvelle valeur. */
 export function AnimatedNumber({ value, format = (n) => String(Math.round(n)), className, duration = 1.1 }: AnimatedNumberProps) {
   const reduce = useReducedMotion();
   const mv = useMotionValue(reduce ? value : 0);

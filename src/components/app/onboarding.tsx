@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Field, inputClass } from "../ui/field";
 import { Logo } from "../ui/logo";
+import { PixelIcon, type PixelName } from "@/components/ui/pixel-icon";
 
 const STEPS = ["Bienvenue", "Conversion", "Séance type", "Planning"] as const;
 
@@ -31,8 +32,7 @@ export function Onboarding() {
 
   return (
     <div className="relative flex min-h-dvh flex-col overflow-hidden">
-      <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black,transparent_65%)]" />
-      <div className="pointer-events-none absolute -top-40 left-1/2 size-[560px] -translate-x-1/2 rounded-full bg-volt/15 blur-3xl" />
+      <div className="led-matrix pointer-events-none absolute inset-x-0 top-0 h-80 [mask-image:linear-gradient(black,transparent)]" />
 
       <header className="relative flex items-center justify-between px-5 py-5 sm:px-8">
         <Link href="/" aria-label="Retour au site">
@@ -41,7 +41,7 @@ export function Onboarding() {
         {step > 0 && (
           <ol className="flex items-center gap-1.5" aria-label={`Étape ${step} sur 3`}>
             {STEPS.slice(1).map((label, i) => (
-              <li key={label} className={cn("h-1.5 rounded-full transition-all duration-500", i + 1 === step ? "w-8 bg-volt" : i + 1 < step ? "w-3 bg-volt/50" : "w-3 bg-white/15")}>
+              <li key={label} className={cn("h-1.5 rounded-full transition-[width,background-color] duration-500", i + 1 === step ? "w-8 bg-volt" : i + 1 < step ? "w-3 bg-volt/50" : "w-3 bg-white/15")}>
                 <span className="sr-only">{label}</span>
               </li>
             ))}
@@ -78,7 +78,7 @@ export function Onboarding() {
               </Button>
             ) : (
               <Button size="lg" className="ml-auto" disabled={!canNext} onClick={() => startFresh({ ...draft, name: draft.name.trim() })}>
-                <Check className="size-4" /> C&apos;est parti
+                <Check className="size-4" /> C’est parti
               </Button>
             )}
           </div>
@@ -91,21 +91,20 @@ export function Onboarding() {
 function Welcome({ onDemo, onSetup }: { onDemo: () => void; onSetup: () => void }) {
   return (
     <div>
-      <p className="eyebrow mb-4 text-volt">Projet vitrine · aucune inscription</p>
       <h1 id="step-0" className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
         Chaque écart se paie. <span className="text-fg-muted">En minutes.</span>
       </h1>
       <p className="mt-4 max-w-md text-fg-muted">
-        Un burger devient une dette de sport. Tes séances plus longues que d&apos;habitude la remboursent, et l&apos;app répartit
+        Un burger devient une dette de sport. Tes séances plus longues que d’habitude la remboursent, et l’app répartit
         le reste sur ton planning.
       </p>
 
       <div className="card mt-8 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 p-4 text-center sm:p-5" aria-label="Exemple : 14 euros de burger donnent 14 minutes de dette, remboursées par une séance de 74 minutes au lieu de 60">
-        <Equation emoji="🍔" value="14 €" label="dépensés" delay={0.1} />
+        <Equation icon="burger" value="14 €" label="dépensés" delay={0.1} />
         <ArrowRight className="size-4 text-fg-subtle" aria-hidden />
-        <Equation emoji="⏳" value="14 min" label="de dette" tone="text-ember" delay={0.35} />
+        <Equation icon="clock" value="14 min" label="de dette" tone="text-ember" delay={0.35} />
         <ArrowRight className="size-4 text-fg-subtle" aria-hidden />
-        <Equation emoji="🏋️" value="74 min" label="au lieu de 60" tone="text-volt" delay={0.6} />
+        <Equation icon="gym" value="74 min" label="au lieu de 60" tone="text-volt" delay={0.6} />
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -122,17 +121,15 @@ function Welcome({ onDemo, onSetup }: { onDemo: () => void; onSetup: () => void 
           <span className="text-xs font-normal text-fg-muted">Partir de zéro en 3 étapes</span>
         </Button>
       </div>
-      <p className="mt-5 text-xs text-fg-subtle">Tout reste dans ton navigateur (localStorage). Rien n&apos;est envoyé nulle part.</p>
+      <p className="mt-5 text-xs text-fg-subtle">Tout reste dans ton navigateur (localStorage). Rien n’est envoyé nulle part.</p>
     </div>
   );
 }
 
-function Equation({ emoji, value, label, tone, delay }: { emoji: string; value: string; label: string; tone?: string; delay: number }) {
+function Equation({ icon, value, label, tone, delay }: { icon: PixelName; value: string; label: string; tone?: string; delay: number }) {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay, duration: 0.5 }}>
-      <div className="text-2xl" aria-hidden>
-        {emoji}
-      </div>
+      <PixelIcon name={icon} className={cn("mx-auto size-7", tone ?? "text-fg")} />
       <div className={cn("mt-1 font-semibold tabular-nums", tone)}>{value}</div>
       <div className="text-[11px] text-fg-subtle">{label}</div>
     </motion.div>
@@ -170,7 +167,7 @@ function RateStep({ draft, setDraft }: StepProps) {
       <div>
         <p className="eyebrow mb-3">Étape 1 · Conversion</p>
         <h1 id="step-1" className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Combien vaut un euro ?
+          Combien vaut un euro ?
         </h1>
         <p className="mt-3 text-fg-muted">Choisis combien de minutes de sport coûte chaque euro de fast-food.</p>
       </div>
@@ -179,9 +176,7 @@ function RateStep({ draft, setDraft }: StepProps) {
       </Field>
       <RangeField id="rate" label="Taux de conversion" value={draft.rate} {...LIMITS.rate} suffix="min / €" onChange={(rate) => setDraft((d) => ({ ...d, rate }))} />
       <div className="card flex items-center gap-4 p-4" aria-live="polite">
-        <span className="text-3xl" aria-hidden>
-          🍔
-        </span>
+        <PixelIcon name="burger" className="size-8 text-ember" />
         <p className="text-sm text-fg-muted">
           Un menu à <strong className="text-fg">{menu} €</strong> ={" "}
           <strong className="text-ember">{Math.round(menu * draft.rate)} minutes</strong> de sport en plus.
@@ -200,7 +195,7 @@ function StandardStep({ draft, setDraft }: StepProps) {
           Ta séance habituelle dure…
         </h1>
         <p className="mt-3 text-fg-muted">
-          C&apos;est ta base : elle ne rembourse rien. Seules les minutes <em className="text-fg not-italic">au-delà</em> réduisent ta dette.
+          C’est ta base : elle ne rembourse rien. Seules les minutes <em className="text-fg not-italic">au-delà</em> réduisent ta dette.
         </p>
       </div>
       <RangeField id="standard" label="Durée standard" value={draft.standardDuration} {...LIMITS.standard} suffix="min" onChange={(standardDuration) => setDraft((d) => ({ ...d, standardDuration }))} />
@@ -231,7 +226,7 @@ function ScheduleStep({ draft, setDraft }: StepProps) {
       <div>
         <p className="eyebrow mb-3">Étape 3 · Planning</p>
         <h1 id="step-3" className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Quand t&apos;entraînes-tu ?
+          Quand t’entraînes-tu ?
         </h1>
         <p className="mt-3 text-fg-muted">La dette sera répartie sur ces séances. Tu pourras tout changer plus tard.</p>
       </div>
@@ -256,7 +251,7 @@ export function ScheduleEditor({
 }) {
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-7 gap-1.5" role="group" aria-label="Jours d'entraînement">
+      <div className="grid grid-cols-7 gap-1.5" role="group" aria-label="Jours d’entraînement">
         {WEEKDAYS_SHORT.map((label, i) => {
           const day = (i + 1) as Weekday;
           const on = schedule.some((s) => s.day === day);
@@ -268,8 +263,8 @@ export function ScheduleEditor({
               aria-label={WEEKDAYS_LONG[i]}
               onClick={() => onToggle(day)}
               className={cn(
-                "flex h-12 flex-col items-center justify-center rounded-2xl border text-sm font-semibold transition sm:h-14",
-                on ? "border-volt bg-volt text-ink-950 shadow-[0_6px_20px_-6px_rgb(212_255_58/0.6)]" : "border-white/8 bg-ink-800 text-fg-muted hover:border-white/20 hover:text-fg",
+                "flex h-12 flex-col items-center justify-center rounded-xl border text-sm font-semibold transition sm:h-14",
+                on ? "border-volt bg-volt text-ink-950" : "border-white/8 bg-ink-800 text-fg-muted hover:border-white/20 hover:text-fg",
               )}
             >
               {label}
@@ -286,7 +281,7 @@ export function ScheduleEditor({
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <label className="flex items-center justify-between gap-4 rounded-2xl border border-white/6 bg-ink-850 px-4 py-2.5">
+            <label className="flex items-center justify-between gap-4 rounded-xl border border-white/6 bg-ink-850 px-4 py-2.5">
               <span className="text-sm font-medium">{WEEKDAYS_LONG[s.day - 1]}</span>
               <input type="time" value={s.time} onChange={(e) => onTime(s.day, e.target.value)} className="rounded-lg bg-ink-750 px-2.5 py-1.5 font-mono text-sm tabular-nums" aria-label={`Heure du ${WEEKDAYS_LONG[s.day - 1].toLowerCase()}`} />
             </label>

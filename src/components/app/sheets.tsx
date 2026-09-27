@@ -14,7 +14,7 @@ import { Sheet } from "../ui/sheet";
 import { EntryForm } from "./entry-form";
 import { EntryRow } from "./entry-row";
 
-/** Hôte unique de toutes les feuilles modales de l'app. */
+/** Hôte unique de toutes les feuilles modales de l’app. */
 export function Sheets() {
   const sheet = useUI((s) => s.sheet);
   const openId = useUI((s) => s.openId);
@@ -22,7 +22,7 @@ export function Sheets() {
   const open = useUI((s) => s.open);
   const todayDate = useToday();
 
-  // Garde le dernier contenu affiché pendant l'animation de fermeture.
+  // Garde le dernier contenu affiché pendant l’animation de fermeture.
   const [shown, setShown] = useState<EntrySheet | null>(sheet);
   if (sheet && sheet !== shown) setShown(sheet);
 
@@ -46,7 +46,7 @@ export function Sheets() {
   if (!s) return null;
   if (s.type === "quick") {
     return (
-      <Sheet open={isOpen} onClose={close} eyebrow="Nouvelle entrée" title="Qu'est-ce qui s'est passé ?">
+      <Sheet open={isOpen} onClose={close} eyebrow="Nouvelle entrée" title="Qu’est-ce qui s’est passé ?">
         <QuickActions />
       </Sheet>
     );
@@ -65,7 +65,7 @@ export function Sheets() {
       open={isOpen}
       onClose={close}
       eyebrow={editing ? "Modifier" : "Nouvelle entrée"}
-      title={kind === "expense" ? (editing ? "Écart fast-food" : "J'ai craqué") : editing ? "Séance" : "J'ai bougé"}
+      title={kind === "expense" ? (editing ? "Écart fast-food" : "J’ai craqué") : editing ? "Séance" : "J’ai bougé"}
       description={kind === "expense" ? "Chaque euro devient des minutes à rembourser." : "Seules les minutes au-delà de ta durée standard remboursent."}
     >
       <EntryForm key={openId} initialKind={s.kind} initialDate={s.date} entry={s.entry} onDone={close} />
@@ -92,7 +92,7 @@ function QuickActions() {
     {
       icon: Dumbbell,
       title: "Séance terminée",
-      desc: "Saisis la durée d'une séance déjà faite.",
+      desc: "Saisis la durée d’une séance déjà faite.",
       tone: "volt" as const,
       onClick: () => open({ type: "entry", kind: "session" }),
     },
@@ -117,7 +117,7 @@ function QuickActions() {
           type="button"
           onClick={onClick}
           className={cn(
-            "group flex items-center gap-4 rounded-2xl border p-4 text-left transition sm:flex-col sm:items-start sm:gap-6 sm:p-5",
+            "group flex items-center gap-4 rounded-xl border p-4 text-left transition sm:flex-col sm:items-start sm:gap-6 sm:p-5",
             tone === "ember" && "border-ember/20 bg-ember/[0.06] hover:border-ember/50 hover:bg-ember/10",
             tone === "volt" && "border-volt/20 bg-volt/[0.05] hover:border-volt/50 hover:bg-volt/10",
             tone === "white" && "border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.06]",
@@ -125,7 +125,7 @@ function QuickActions() {
         >
           <span
             className={cn(
-              "grid size-12 shrink-0 place-items-center rounded-xl transition group-hover:scale-105",
+              "grid size-12 shrink-0 place-items-center rounded-lg",
               tone === "ember" && "bg-ember text-ink-950",
               tone === "volt" && "bg-volt text-ink-950",
               tone === "white" && "bg-fg text-ink-950",
@@ -153,15 +153,15 @@ function DayDetail({ date }: { date: string }) {
   const planned = d.plan.slots.find((p) => p.date === date);
 
   let status: { label: string; tone: string } | null = null;
-  if (slot && hasSession) status = { label: `Séance planifiée à ${slot.time} — honorée`, tone: "text-volt" };
-  else if (slot && date < d.today) status = { label: `Séance planifiée à ${slot.time} — manquée`, tone: "text-ember-soft" };
+  if (slot && hasSession) status = { label: `Séance planifiée à ${slot.time}, honorée`, tone: "text-volt" };
+  else if (slot && date < d.today) status = { label: `Séance planifiée à ${slot.time}, manquée`, tone: "text-ember-soft" };
   else if (slot) status = { label: `Séance planifiée à ${slot.time}`, tone: "text-fg" };
   else if (hasSession) status = { label: "Séance bonus hors planning", tone: "text-volt" };
 
   return (
     <div className="space-y-5 pt-1">
       {status && (
-        <div className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4">
+        <div className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4">
           <CalendarPlus className="size-5 shrink-0 text-fg-subtle" />
           <div>
             <p className={cn("text-sm font-medium", status.tone)}>{status.label}</p>
@@ -181,8 +181,8 @@ function DayDetail({ date }: { date: string }) {
           ))}
         </div>
       ) : (
-        <p className="rounded-2xl border border-dashed border-white/10 p-6 text-center text-sm text-fg-subtle">
-          {isFuture ? "Ce jour n'est pas encore arrivé." : "Rien d'enregistré ce jour-là."}
+        <p className="rounded-xl border border-dashed border-white/10 p-6 text-center text-sm text-fg-subtle">
+          {isFuture ? "Ce jour n’est pas encore arrivé." : "Rien d’enregistré ce jour-là."}
         </p>
       )}
 

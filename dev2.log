@@ -1,0 +1,24 @@
+▲ Next.js 16.3.6 (Turbopack)
+- Local:         http://localhost:3100
+- Network:       http://192.0.2.2:3100
+✓ Ready in 502ms
+✓ Running next.config.ts took 75ms
+
+ GET / 200 in 567ms (next.js: 204ms, application-code: 363ms)
+ GET /app 200 in 208ms (next.js: 21ms, application-code: 188ms)
+ GET /app 200 in 44ms (next.js: 4ms, application-code: 41ms)
+ GET /app 200 in 46ms (next.js: 4ms, application-code: 42ms)
+ GET /app 200 in 72ms (next.js: 6ms, application-code: 66ms)
+ GET /app 200 in 54ms (next.js: 4ms, application-code: 50ms)
+ GET /app/calendrier 200 in 89ms (next.js: 29ms, application-code: 60ms)
+ GET / 200 in 154ms (next.js: 6ms, application-code: 148ms)
+ GET /app 200 in 47ms (next.js: 4ms, application-code: 43ms)
+ GET / 200 in 92ms (next.js: 3ms, application-code: 89ms)
+ GET /app 200 in 57ms (next.js: 4ms, application-code: 52ms)
+ GET /app/calendrier 200 in 61ms (next.js: 3ms, application-code: 59ms)
+ GET /app/historique 200 in 75ms (next.js: 16ms, application-code: 59ms)
+ GET /app/progression 200 in 69ms (next.js: 22ms, application-code: 48ms)
+ GET /app/reglages 200 in 63ms (next.js: 21ms, application-code: 42ms)
+ GET /app 200 in 53ms (next.js: 9ms, application-code: 43ms)
+ GET /app 200 in 59ms (next.js: 4ms, application-code: 55ms)
+ GET / 200 in 116ms (next.js: 7ms, application-code: 109ms)

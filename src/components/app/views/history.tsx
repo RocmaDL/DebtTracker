@@ -57,7 +57,7 @@ export function HistoryView() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Rechercher : pizza, course, soirée…"
-            aria-label="Rechercher dans l'historique"
+            aria-label="Rechercher dans l’historique"
             className={cn(inputClass, "pl-11")}
           />
         </div>
@@ -80,11 +80,9 @@ export function HistoryView() {
 
       {groups.length === 0 ? (
         <div className="card flex flex-col items-center gap-2 px-6 py-16 text-center">
-          <span className="text-4xl" aria-hidden>
-            🔍
-          </span>
+          <Search className="size-8 text-fg-subtle" aria-hidden />
           <p className="font-medium">Aucun résultat</p>
-          <p className="text-sm text-fg-muted">{d.entries.length === 0 ? "Tu n'as encore rien enregistré." : "Essaie un autre mot-clé ou filtre."}</p>
+          <p className="text-sm text-fg-muted">{d.entries.length === 0 ? "Tu n’as encore rien enregistré." : "Essaie un autre mot-clé ou filtre."}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -123,8 +121,8 @@ export function HistoryView() {
                         <button
                           type="button"
                           onClick={() => remove(e.id)}
-                          aria-label="Supprimer l'entrée"
-                          className="mr-1 grid size-9 shrink-0 place-items-center rounded-xl text-fg-subtle transition hover:bg-ember/10 hover:text-ember-soft sm:opacity-0 sm:group-hover/row:opacity-100 sm:focus-visible:opacity-100"
+                          aria-label="Supprimer l’entrée"
+                          className="mr-1 grid size-9 shrink-0 place-items-center rounded-lg text-fg-subtle transition hover:bg-ember/10 hover:text-ember-soft sm:opacity-0 sm:group-hover/row:opacity-100 sm:focus-visible:opacity-100"
                         >
                           <Trash2 className="size-4" />
                         </button>

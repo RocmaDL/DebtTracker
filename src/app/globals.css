@@ -31,14 +31,14 @@
   --color-amber: #ffb547;
   --color-sky: #6ad7ff;
 
-  --radius-card: 1.25rem;
+  --radius-card: 0.75rem;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --animate-marquee: marquee 40s linear infinite;
   --animate-pulse-ring: pulse-ring 2.4s var(--ease-out-expo) infinite;
   --animate-shimmer: shimmer 2.2s linear infinite;
+  --animate-blink: blink 1s steps(1) infinite;
 
   @keyframes marquee {
     to {
@@ -52,6 +52,11 @@
     }
     100% {
       transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  @keyframes blink {
+    50% {
       opacity: 0;
     }
   }
@@ -111,19 +116,32 @@ body {
   .card {
     position: relative;
     border-radius: var(--radius-card);
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.01)), var(--color-ink-850);
+    background: var(--color-ink-850);
     border: 1px solid rgb(255 255 255 / 0.07);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.04),
-      0 20px 40px -24px rgb(0 0 0 / 0.8);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
   }
 
+  /* Libellé discret de carte : casse normale, pas de capitales espacées. */
   .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-fg-subtle);
+  }
+
+  /* Petites capitales techniques, réservées aux en-têtes de tableau (jours du calendrier…) */
+  .caps {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-fg-subtle);
+  }
+
+  /* Matrice de LED éteintes : la texture du tableau d'affichage */
+  .led-matrix {
+    background-color: var(--color-ink-900);
+    background-image: radial-gradient(circle at center, rgb(255 255 255 / 0.055) 1.1px, transparent 1.4px);
+    background-size: 7px 7px;
   }
 
   .hairline {
@@ -135,14 +153,6 @@ body {
       linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
       linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
     background-size: 56px 56px;
-  }
-
-  .text-gradient-volt {
-    background: linear-gradient(100deg, var(--color-volt) 20%, var(--color-volt-soft) 50%, var(--color-volt) 80%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
   .skeleton {
@@ -185,7 +195,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 999px;
   background: var(--color-fg);
   border: 4px solid var(--color-ink-900);
-  box-shadow: 0 0 0 1px var(--color-volt), 0 4px 16px rgb(212 255 58 / 0.35);
+  box-shadow: 0 0 0 1px var(--color-volt);
 }
 input[type="range"]::-moz-range-thumb {
   width: 16px;

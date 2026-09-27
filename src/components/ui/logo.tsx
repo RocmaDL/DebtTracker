@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** Monogramme : une barre de dette (ember) coupée par un éclair d'effort (volt). */
+/** Monogramme : une barre de dette (ember) coupée par un éclair d’effort (volt). */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={cn("size-8", className)} aria-hidden>

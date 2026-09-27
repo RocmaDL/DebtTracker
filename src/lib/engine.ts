@@ -118,8 +118,8 @@ export interface Plan {
 
 /**
  * Répartit la dette sur les séances planifiées restantes du mois.
- * Si une séance est déjà faite aujourd'hui, aujourd'hui ne compte plus.
- * S'il ne reste aucune séance ce mois-ci, on prend les 4 prochaines.
+ * Si une séance est déjà faite aujourd’hui, aujourd’hui ne compte plus.
+ * S’il ne reste aucune séance ce mois-ci, on prend les 4 prochaines.
  */
 export function computePlan(entries: Entry[], settings: Settings, todayDate: ISODate, debt: number): Plan {
   const doneToday = entries.some((e) => e.kind === "session" && e.date === todayDate);

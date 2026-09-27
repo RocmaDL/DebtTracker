@@ -20,7 +20,7 @@ function niceMax(v: number) {
   return Math.ceil(v / step) * step;
 }
 
-/** Évolution de la dette : aire + ligne, réticule qui s'accroche au jour le plus proche. */
+/** Évolution de la dette : aire + ligne, réticule qui s’accroche au jour le plus proche. */
 export function DebtChart({ points, height = 200 }: DebtChartProps) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
@@ -119,7 +119,7 @@ export function DebtChart({ points, height = 200 }: DebtChartProps) {
 
       {geo && p && (
         <div
-          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-ink-750/95 px-3 py-2 text-xs shadow-xl backdrop-blur"
+          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-ink-750/95 px-3 py-2 text-xs shadow-xl backdrop-blur"
           style={{ left: Math.min(Math.max(geo.x(active), 70), width - 70) }}
           aria-live="polite"
         >

@@ -14,6 +14,7 @@ import { useEntryActions } from "@/hooks/use-entry-actions";
 import { Button } from "../ui/button";
 import { Field, inputClass } from "../ui/field";
 import { Segmented } from "../ui/segmented";
+import { PixelIcon, activityIcon, categoryIcon } from "@/components/ui/pixel-icon";
 
 interface EntryFormProps {
   initialKind: "expense" | "session";
@@ -52,9 +53,9 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
         : !amount
           ? "Indique le montant dépensé."
           : Number.isNaN(amountValue) || amountValue < LIMITS.amount.min
-            ? "Le montant doit être d'au moins 0,50 €."
+            ? "Le montant doit être d’au moins 0,50 €."
             : amountValue > LIMITS.amount.max
-              ? "Au-delà de 500 €, ce n'est plus un écart, c'est un banquet."
+              ? "Au-delà de 500 €, ce n’est plus un écart, c’est un banquet."
               : null,
     duration:
       kind !== "session"
@@ -64,7 +65,7 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
           : duration > LIMITS.duration.max
             ? "10 heures maximum, même pour un ultra-trail."
             : null,
-    date: !date ? "Choisis une date." : date > d.today ? "Impossible d'enregistrer une entrée dans le futur." : null,
+    date: !date ? "Choisis une date." : date > d.today ? "Impossible d’enregistrer une entrée dans le futur." : null,
   };
   const hasError = Object.values(errors).some(Boolean);
 
@@ -105,15 +106,15 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
       <div className="space-y-6 pt-1">
         {!isEdit && (
           <Segmented
-            label="Type d'entrée"
+            label="Type d’entrée"
             value={kind}
             onChange={(k) => {
               setKind(k);
               setSubmitted(false);
             }}
             options={[
-              { value: "expense", label: <>🍔 Écart fast-food</>, tone: "ember" },
-              { value: "session", label: <>💪 Séance de sport</>, tone: "volt" },
+              { value: "expense", label: "Écart fast-food", tone: "ember" },
+              { value: "session", label: "Séance de sport", tone: "volt" },
             ]}
           />
         )}
@@ -122,7 +123,7 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
           {kind === "expense" ? (
             <motion.div key="expense" initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 12 }} transition={{ duration: 0.2 }} className="space-y-6">
               <fieldset>
-                <legend className="mb-2 text-sm font-medium text-fg-muted">Qu’est-ce qui t’a fait craquer ?</legend>
+                <legend className="mb-2 text-sm font-medium text-fg-muted">Qu’est-ce qui t’a fait craquer ?</legend>
                 <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
                   {CATEGORY_KEYS.map((c) => (
                     <button
@@ -134,15 +135,13 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
                         if (!amount) setAmount(String(CATEGORIES[c].typical).replace(".", ","));
                       }}
                       className={cn(
-                        "flex flex-col items-center gap-1 rounded-2xl border py-2.5 text-[11px] font-medium transition",
+                        "flex flex-col items-center gap-1.5 rounded-lg border py-3 text-[11px] font-medium transition-colors",
                         category === c
-                          ? "border-ember/60 bg-ember/10 text-fg shadow-[inset_0_0_0_1px_rgb(255_91_58/0.3)]"
+                          ? "border-ember/60 bg-ember/10 text-fg"
                           : "border-white/6 bg-ink-800 text-fg-muted hover:border-white/15 hover:text-fg",
                       )}
                     >
-                      <span className="text-xl leading-none" aria-hidden>
-                        {CATEGORIES[c].emoji}
-                      </span>
+                      <PixelIcon name={categoryIcon(c)} className={cn("size-6", category === c ? "text-ember" : "")} />
                       {CATEGORIES[c].label}
                     </button>
                   ))}
@@ -178,15 +177,13 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
                       aria-pressed={activity === a}
                       onClick={() => setActivity(a)}
                       className={cn(
-                        "flex flex-col items-center gap-1 rounded-2xl border py-2.5 text-[11px] font-medium transition",
+                        "flex flex-col items-center gap-1.5 rounded-lg border py-3 text-[11px] font-medium transition-colors",
                         activity === a
-                          ? "border-volt/60 bg-volt/10 text-fg shadow-[inset_0_0_0_1px_rgb(212_255_58/0.25)]"
+                          ? "border-volt/60 bg-volt/10 text-fg"
                           : "border-white/6 bg-ink-800 text-fg-muted hover:border-white/15 hover:text-fg",
                       )}
                     >
-                      <span className="text-xl leading-none" aria-hidden>
-                        {ACTIVITIES[a].emoji}
-                      </span>
+                      <PixelIcon name={activityIcon(a)} className={cn("size-6", activity === a ? "text-volt" : "")} />
                       {ACTIVITIES[a].label}
                     </button>
                   ))}
@@ -206,7 +203,7 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
                 }
               >
                 <div className="flex items-center gap-2">
-                  <Button variant="secondary" size="icon" className="size-16 rounded-2xl" aria-label="Retirer 5 minutes" onClick={() => setDuration((v) => Math.max(1, (v || 0) - 5))}>
+                  <Button variant="secondary" size="icon" className="size-16 rounded-xl" aria-label="Retirer 5 minutes" onClick={() => setDuration((v) => Math.max(1, (v || 0) - 5))}>
                     <Minus className="size-5" />
                   </Button>
                   <div className="relative flex-1">
@@ -220,7 +217,7 @@ export function EntryForm({ initialKind, initialDate, entry, onDone }: EntryForm
                     />
                     <span className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-sm text-fg-subtle">min</span>
                   </div>
-                  <Button variant="secondary" size="icon" className="size-16 rounded-2xl" aria-label="Ajouter 5 minutes" onClick={() => setDuration((v) => Math.min(600, (v || 0) + 5))}>
+                  <Button variant="secondary" size="icon" className="size-16 rounded-xl" aria-label="Ajouter 5 minutes" onClick={() => setDuration((v) => Math.min(600, (v || 0) + 5))}>
                     <Plus className="size-5" />
                   </Button>
                 </div>
@@ -286,8 +283,8 @@ function StandardBar({ duration, standard }: { duration: number; standard: numbe
   return (
     <div className="mt-3 space-y-1.5" aria-hidden>
       <div className="flex h-2 gap-0.5 overflow-hidden rounded-full bg-white/5">
-        <div className="h-full rounded-l-full bg-fg-subtle/60 transition-all" style={{ width: `${(Math.min(duration, standard) / total) * 100}%` }} />
-        {surplus > 0 && <div className="h-full rounded-r-full bg-volt transition-all" style={{ width: `${(surplus / total) * 100}%` }} />}
+        <div className="h-full rounded-l-full bg-fg-subtle/60 transition-[width]" style={{ width: `${(Math.min(duration, standard) / total) * 100}%` }} />
+        {surplus > 0 && <div className="h-full rounded-r-full bg-volt transition-[width]" style={{ width: `${(surplus / total) * 100}%` }} />}
       </div>
       <div className="flex justify-between font-mono text-[10px] text-fg-subtle uppercase">
         <span>Standard {standard} min</span>
@@ -305,11 +302,11 @@ function ImpactPreview({ kind, delta, before, after, rate }: { kind: "expense" |
       layout
       aria-live="polite"
       className={cn(
-        "flex items-center gap-4 rounded-2xl border p-4",
+        "flex items-center gap-4 rounded-xl border p-4",
         isExpense ? "border-ember/25 bg-ember/[0.06]" : delta > 0 ? "border-volt/25 bg-volt/[0.05]" : "border-white/8 bg-white/[0.03]",
       )}
     >
-      <span className={cn("grid size-11 shrink-0 place-items-center rounded-xl", isExpense ? "bg-ember/15 text-ember" : "bg-volt/15 text-volt")}>
+      <span className={cn("grid size-11 shrink-0 place-items-center rounded-lg", isExpense ? "bg-ember/15 text-ember" : "bg-volt/15 text-volt")}>
         <Icon className="size-5" />
       </span>
       <div className="min-w-0 flex-1">
@@ -323,7 +320,7 @@ function ImpactPreview({ kind, delta, before, after, rate }: { kind: "expense" |
               ? delta > before
                 ? "Au-delà de ta dette : le surplus ne se stocke pas."
                 : "Chaque minute au-delà du standard compte."
-              : "Pas de remboursement, mais de l'XP et ta série continue."}
+              : "Pas de remboursement, mais de l’XP et ta série continue."}
         </p>
       </div>
       <div className="text-right">

@@ -1,22 +1,22 @@
 import type { Activity, ExpenseCategory, Settings } from "./types";
 
-export const CATEGORIES: Record<ExpenseCategory, { label: string; emoji: string; typical: number }> = {
-  burger: { label: "Burger", emoji: "🍔", typical: 12.9 },
-  pizza: { label: "Pizza", emoji: "🍕", typical: 14.5 },
-  tacos: { label: "Tacos", emoji: "🌮", typical: 9.5 },
-  kebab: { label: "Kebab", emoji: "🥙", typical: 8.5 },
-  sushi: { label: "Sushi", emoji: "🍣", typical: 18 },
-  sweet: { label: "Sucré", emoji: "🍩", typical: 4.5 },
-  other: { label: "Autre", emoji: "🍟", typical: 6 },
+export const CATEGORIES: Record<ExpenseCategory, { label: string; typical: number }> = {
+  burger: { label: "Burger", typical: 12.9 },
+  pizza: { label: "Pizza", typical: 14.5 },
+  tacos: { label: "Tacos", typical: 9.5 },
+  kebab: { label: "Kebab", typical: 8.5 },
+  sushi: { label: "Sushi", typical: 18 },
+  sweet: { label: "Sucré", typical: 4.5 },
+  other: { label: "Autre", typical: 6 },
 };
 
-export const ACTIVITIES: Record<Activity, { label: string; emoji: string }> = {
-  gym: { label: "Musculation", emoji: "🏋️" },
-  run: { label: "Course", emoji: "🏃" },
-  bike: { label: "Vélo", emoji: "🚴" },
-  swim: { label: "Natation", emoji: "🏊" },
-  hiit: { label: "HIIT", emoji: "🔥" },
-  other: { label: "Autre", emoji: "🤸" },
+export const ACTIVITIES: Record<Activity, { label: string }> = {
+  gym: { label: "Musculation" },
+  run: { label: "Course" },
+  bike: { label: "Vélo" },
+  swim: { label: "Natation" },
+  hiit: { label: "HIIT" },
+  other: { label: "Autre" },
 };
 
 export const CATEGORY_KEYS = Object.keys(CATEGORIES) as ExpenseCategory[];

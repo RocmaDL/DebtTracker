@@ -7,7 +7,7 @@ import { computeStreaks, levelFor, totalXp, unlockedBadges } from "@/lib/gamific
 import { useApp } from "@/lib/store";
 import { useToday } from "./use-today";
 
-/** Toutes les données calculées de l'app, mémoïsées sur (entrées, réglages, jour). */
+/** Toutes les données calculées de l’app, mémoïsées sur (entrées, réglages, jour). */
 export function useDerived() {
   const entries = useApp((s) => s.entries);
   const settings = useApp((s) => s.settings);

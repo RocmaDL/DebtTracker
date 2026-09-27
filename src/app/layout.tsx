@@ -10,7 +10,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "DebtTracker — Chaque burger se paie en minutes",
+    default: "DebtTracker · Chaque burger se paie en minutes",
     template: "%s · DebtTracker",
   },
   description:
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: "DebtTracker",
-    title: "DebtTracker — Chaque burger se paie en minutes",
+    title: "DebtTracker · Chaque burger se paie en minutes",
     description: "Transformez vos écarts fast-food en minutes de sport, et remboursez-les séance après séance.",
   },
   twitter: { card: "summary_large_image" },

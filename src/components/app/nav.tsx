@@ -26,14 +26,14 @@ export function Sidebar() {
 
   return (
     <aside className="hairline sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r bg-ink-900/60 px-4 py-6 backdrop-blur lg:flex">
-      <Link href="/" className="mb-8 px-2" aria-label="DebtTracker — retour au site">
+      <Link href="/" className="mb-8 px-2" aria-label="DebtTracker, retour au site">
         <Logo />
       </Link>
 
       <button
         type="button"
         onClick={() => open({ type: "quick" })}
-        className="group mb-6 flex h-12 items-center gap-3 rounded-2xl bg-volt px-4 font-semibold text-ink-950 shadow-[0_8px_30px_-8px_rgb(212_255_58/0.55)] transition hover:bg-volt-soft active:scale-[0.98]"
+        className="group mb-6 flex h-12 items-center gap-3 rounded-xl bg-volt px-4 font-semibold text-ink-950 transition hover:bg-volt-soft active:scale-[0.98]"
       >
         <Plus className="size-5 transition group-hover:rotate-90" />
         Nouvelle entrée
@@ -49,14 +49,14 @@ export function Sidebar() {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "relative flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors",
+                "relative flex h-11 items-center gap-3 rounded-lg px-3 text-sm font-medium transition-colors",
                 active ? "text-fg" : "text-fg-muted hover:bg-white/[0.03] hover:text-fg",
               )}
             >
               {active && (
                 <motion.span
                   layoutId="sidebar-active"
-                  className="absolute inset-0 rounded-xl border border-white/8 bg-white/[0.05]"
+                  className="absolute inset-0 rounded-lg border border-white/8 bg-white/[0.05]"
                   transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                 />
               )}
@@ -96,7 +96,7 @@ export function MobileHeader() {
   const pathname = usePathname();
   return (
     <header className="hairline sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-ink-950/80 px-4 backdrop-blur-xl lg:hidden">
-      <Link href="/" aria-label="DebtTracker — retour au site">
+      <Link href="/" aria-label="DebtTracker, retour au site">
         <Logo />
       </Link>
       <div className="flex items-center gap-2">
@@ -155,7 +155,7 @@ export function TabBar() {
             type="button"
             onClick={() => open({ type: "quick" })}
             aria-label="Nouvelle entrée"
-            className="-mt-5 grid size-14 place-items-center rounded-2xl bg-volt text-ink-950 shadow-[0_0_0_6px_var(--color-ink-950),0_10px_30px_-6px_rgb(212_255_58/0.6)] transition active:scale-95"
+            className="-mt-5 grid size-14 place-items-center rounded-xl bg-volt text-ink-950 shadow-[0_0_0_6px_var(--color-ink-950)] transition active:scale-95"
           >
             <Plus className="size-6" strokeWidth={2.5} />
           </button>

@@ -17,6 +17,7 @@ import { Button } from "../../ui/button";
 import { ProgressRing } from "../../ui/progress-ring";
 import { BadgeIcon } from "../badge-icon";
 import { EntryRow } from "../entry-row";
+import { PixelIcon } from "@/components/ui/pixel-icon";
 
 const rise = {
   hidden: { opacity: 0, y: 16 },
@@ -85,12 +86,6 @@ export function DashboardView() {
           aria-labelledby="debt-title"
           className="card overflow-hidden p-6 sm:p-8 lg:col-span-3"
         >
-          <div
-            className={cn(
-              "pointer-events-none absolute -top-24 -right-24 size-72 rounded-full blur-3xl",
-              d.debt > 0 ? "bg-ember/20" : "bg-volt/20",
-            )}
-          />
           <div className="relative flex items-start justify-between gap-6">
             <div className="min-w-0">
               <h2 id="debt-title" className="eyebrow">
@@ -141,8 +136,8 @@ export function DashboardView() {
             {last30.length > 1 ? (
               <DebtChart points={last30} height={150} />
             ) : (
-              <p className="rounded-2xl border border-dashed border-white/10 p-6 text-center text-sm text-fg-subtle">
-                L&apos;évolution de ta dette apparaîtra ici après tes premières entrées.
+              <p className="rounded-xl border border-dashed border-white/10 p-6 text-center text-sm text-fg-subtle">
+                L’évolution de ta dette apparaîtra ici après tes premières entrées.
               </p>
             )}
           </div>
@@ -183,10 +178,10 @@ export function DashboardView() {
               </div>
 
               {(d.plan.heavy || d.plan.spillsOver) && d.debt > 0 && (
-                <p className="mt-4 flex gap-2 rounded-xl border border-amber/25 bg-amber/[0.07] p-3 text-xs text-amber">
+                <p className="mt-4 flex gap-2 rounded-lg border border-amber/25 bg-amber/[0.07] p-3 text-xs text-amber">
                   <AlertTriangle className="size-4 shrink-0" />
                   {d.plan.heavy
-                    ? "Séance très longue : ajoute un créneau dans ton planning pour étaler l'effort."
+                    ? "Séance très longue : ajoute un créneau dans ton planning pour étaler l’effort."
                     : "Plus de séance planifiée ce mois-ci : la dette est répartie sur les prochaines."}
                 </p>
               )}
@@ -208,7 +203,7 @@ export function DashboardView() {
                   {d.plan.slots.map((s, i) => (
                     <li
                       key={s.date}
-                      className={cn("shrink-0 rounded-xl border px-3 py-2 text-center", i === 0 ? "border-volt/40 bg-volt/[0.07]" : "border-white/8")}
+                      className={cn("shrink-0 rounded-lg border px-3 py-2 text-center", i === 0 ? "border-volt/40 bg-volt/[0.07]" : "border-white/8")}
                     >
                       <p className="font-mono text-[10px] text-fg-subtle uppercase">{formatWeekday(s.date).slice(0, 3)}</p>
                       <p className="text-sm font-semibold tabular-nums">{s.date.slice(8)}</p>
@@ -219,7 +214,7 @@ export function DashboardView() {
             </>
           ) : (
             <div className="mt-4 flex flex-1 flex-col items-start gap-4">
-              <p className="text-sm text-fg-muted">Aucun jour d&apos;entraînement n&apos;est planifié.</p>
+              <p className="text-sm text-fg-muted">Aucun jour d’entraînement n’est planifié.</p>
               <Link href="/app/reglages#planning" className="text-sm font-medium text-volt hover:underline">
                 Configurer mon planning →
               </Link>
@@ -278,7 +273,7 @@ export function DashboardView() {
           </h2>
           {nextBadge ? (
             <div className="mt-5 flex items-center gap-4">
-              <span className="grid size-16 shrink-0 place-items-center rounded-2xl border border-dashed border-amber/40 bg-amber/[0.06]">
+              <span className="grid size-16 shrink-0 place-items-center rounded-xl border border-dashed border-amber/40 bg-amber/[0.06]">
                 <BadgeIcon icon={nextBadge.icon} className="size-7 text-amber" />
               </span>
               <div>
@@ -329,10 +324,10 @@ function Stat({ i, label, value, unit, icon, foot }: { i: number; label: string;
 function EmptyRecent({ onAdd }: { onAdd: () => void }) {
   return (
     <div className="flex flex-col items-center gap-3 px-4 py-10 text-center">
-      <span className="text-4xl" aria-hidden>
-        🥗
+      <span className="led-matrix grid size-16 place-items-center rounded-lg text-volt">
+        <PixelIcon name="misc" className="size-8" />
       </span>
-      <p className="font-medium">Rien pour l&apos;instant</p>
+      <p className="font-medium">Rien pour l’instant</p>
       <p className="max-w-xs text-sm text-fg-muted">Ajoute ton premier écart ou ta première séance pour lancer le compteur.</p>
       <Button size="sm" onClick={onAdd}>
         <Plus className="size-4" /> Nouvelle entrée

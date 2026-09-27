@@ -24,7 +24,7 @@ export function Segmented<T extends string>({ value, onChange, options, label, c
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("relative flex rounded-2xl border border-white/8 bg-ink-800 p-1", className)}
+      className={cn("relative flex rounded-xl border border-white/8 bg-ink-800 p-1", className)}
     >
       {options.map((opt) => {
         const active = opt.value === value;
@@ -36,7 +36,7 @@ export function Segmented<T extends string>({ value, onChange, options, label, c
             aria-checked={active}
             onClick={() => onChange(opt.value)}
             className={cn(
-              "relative z-10 flex h-10 flex-1 items-center justify-center gap-2 rounded-xl text-sm font-medium transition-colors",
+              "relative z-10 flex h-10 flex-1 items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors",
               active ? (opt.tone === "ember" ? "text-ink-950" : opt.tone === "volt" ? "text-ink-950" : "text-fg") : "text-fg-muted hover:text-fg",
             )}
           >
@@ -45,7 +45,7 @@ export function Segmented<T extends string>({ value, onChange, options, label, c
                 layoutId={`seg-${id}`}
                 transition={{ type: "spring", bounce: 0.2, duration: 0.45 }}
                 className={cn(
-                  "absolute inset-0 -z-10 rounded-xl",
+                  "absolute inset-0 -z-10 rounded-lg",
                   opt.tone === "ember" ? "bg-ember" : opt.tone === "volt" ? "bg-volt" : "bg-ink-700",
                 )}
               />

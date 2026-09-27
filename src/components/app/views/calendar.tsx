@@ -3,13 +3,13 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
-import { CATEGORIES } from "@/lib/catalog";
 import { addMonths, formatDayMonth, formatMonth, formatWeekday, monthKey, WEEKDAYS_SHORT } from "@/lib/dates";
 import { calendarMonth, monthRange, summarize, type CalendarDay } from "@/lib/engine";
 import { useUI } from "@/lib/ui-store";
 import { cn, formatDuration, formatEuro, plural } from "@/lib/utils";
 import { useDerived } from "@/hooks/use-derived";
 import { Button } from "../../ui/button";
+import { PixelIcon, categoryIcon } from "@/components/ui/pixel-icon";
 
 export function CalendarView() {
   const d = useDerived();
@@ -39,7 +39,7 @@ export function CalendarView() {
         <div className="flex items-center gap-2">
           {!isCurrent && (
             <Button variant="ghost" size="sm" onClick={() => { setDir(cursor < d.today ? 1 : -1); setCursor(d.today); }}>
-              Aujourd&apos;hui
+              Aujourd’hui
             </Button>
           )}
           <Button variant="secondary" size="icon" aria-label="Mois précédent" onClick={() => shift(-1)}>
@@ -61,7 +61,7 @@ export function CalendarView() {
       <section className="card overflow-hidden p-3 sm:p-6" aria-label={`Calendrier de ${formatMonth(cursor)}`}>
         <div className="grid grid-cols-7 gap-1 pb-2 sm:gap-2" aria-hidden>
           {WEEKDAYS_SHORT.map((w) => (
-            <div key={w} className="eyebrow text-center">
+            <div key={w} className="caps text-center">
               {w}
             </div>
           ))}
@@ -137,9 +137,9 @@ function DayCell({ day, onClick }: { day: CalendarDay; onClick: () => void }) {
       aria-label={label}
       aria-current={day.isToday ? "date" : undefined}
       className={cn(
-        "group relative flex aspect-square min-h-12 flex-col rounded-xl border p-1.5 text-left transition sm:aspect-[1.15] sm:rounded-2xl sm:p-2.5",
+        "group relative flex aspect-square min-h-12 flex-col rounded-lg border p-1.5 text-left transition sm:aspect-[1.15] sm:rounded-xl sm:p-2.5",
         day.inMonth ? "border-white/[0.05] bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.05]" : "border-transparent opacity-30",
-        day.isToday && "border-volt/50 bg-volt/[0.06] shadow-[inset_0_0_0_1px_rgb(212_255_58/0.2)]",
+        day.isToday && "border-volt/50 bg-volt/[0.06]",
       )}
     >
       <span className={cn("text-xs font-medium tabular-nums sm:text-sm", day.isToday ? "text-volt" : day.isFuture ? "text-fg-subtle" : "text-fg-muted")}>
@@ -147,7 +147,7 @@ function DayCell({ day, onClick }: { day: CalendarDay; onClick: () => void }) {
       </span>
 
       <span className="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5" aria-hidden>
-        {day.state === "done" && <span className="block size-2.5 rounded-full bg-volt shadow-[0_0_10px_rgb(212_255_58/0.7)] sm:size-3" />}
+        {day.state === "done" && <span className="block size-2.5 rounded-full bg-volt sm:size-3" />}
         {day.state === "extra" && <span className="block size-2.5 rounded-full border-2 border-volt sm:size-3" />}
         {day.state === "missed" && <span className="block size-2.5 rounded-full border-2 border-ember sm:size-3" />}
         {day.state === "planned" && <span className="block size-2.5 rounded-full border border-dashed border-fg-subtle sm:size-3" />}
@@ -156,8 +156,10 @@ function DayCell({ day, onClick }: { day: CalendarDay; onClick: () => void }) {
       <span className="mt-auto hidden w-full space-y-0.5 sm:block" aria-hidden>
         {minutes > 0 && <span className="block truncate font-mono text-[10px] text-volt tabular-nums">{formatDuration(minutes)}</span>}
         {day.expenses.length > 0 && (
-          <span className="block truncate text-[11px] leading-tight">
-            {day.expenses.map((e) => CATEGORIES[e.category].emoji).join("")}
+          <span className="flex gap-0.5 text-ember">
+            {day.expenses.map((e) => (
+              <PixelIcon key={e.id} name={categoryIcon(e.category)} className="size-3.5" />
+            ))}
           </span>
         )}
       </span>

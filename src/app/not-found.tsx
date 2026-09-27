@@ -14,7 +14,7 @@ export default function NotFound() {
             Accueil
           </Link>
           <Link href="/app" className={buttonClass("primary")}>
-            Ouvrir l&apos;app
+            Ouvrir l’app
           </Link>
         </div>
       </div>

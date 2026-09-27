@@ -46,7 +46,6 @@ export function ProgressRing({ value, size = 120, stroke = 8, tone = "volt", chi
           initial={{ strokeDashoffset: reduce ? c * (1 - clamped) : c }}
           animate={{ strokeDashoffset: c * (1 - clamped) }}
           transition={{ duration: reduce ? 0 : 1.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{ filter: `drop-shadow(0 0 8px ${tones[tone]})` }}
         />
       </svg>
       <div className="absolute inset-0 grid place-items-center">{children}</div>

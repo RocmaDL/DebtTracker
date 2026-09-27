@@ -41,7 +41,7 @@ export interface Settings {
   name: string;
   /** Minutes de dette par euro dépensé. */
   rate: number;
-  /** Durée d'une séance « normale », en minutes. */
+  /** Durée d’une séance « normale », en minutes. */
   standardDuration: number;
   schedule: ScheduleSlot[];
 }

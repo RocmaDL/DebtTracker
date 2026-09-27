@@ -57,7 +57,7 @@ export interface Streaks {
 
 /**
  * Une série compte les séances *planifiées* honorées consécutivement.
- * Aujourd'hui ne casse pas la série tant que la journée n'est pas finie.
+ * Aujourd’hui ne casse pas la série tant que la journée n’est pas finie.
  */
 export function computeStreaks(entries: Entry[], settings: Settings, todayDate: ISODate): Streaks {
   const sessions = entries.filter(isSession);
@@ -117,14 +117,14 @@ export const BADGES: Badge[] = [
   {
     id: "streak-5",
     name: "En rythme",
-    description: "5 séances planifiées honorées d'affilée.",
+    description: "5 séances planifiées honorées d’affilée.",
     icon: "flame",
     test: (c) => c.streaks.best >= 5,
   },
   {
     id: "streak-12",
     name: "Inarrêtable",
-    description: "12 séances planifiées honorées d'affilée.",
+    description: "12 séances planifiées honorées d’affilée.",
     icon: "zap",
     test: (c) => c.streaks.best >= 12,
   },

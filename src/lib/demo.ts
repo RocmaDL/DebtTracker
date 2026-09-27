@@ -78,7 +78,7 @@ export function generateDemo(todayDate: ISODate, weeks = 9): Entry[] {
       balance += Math.round(amount * s.rate);
     }
 
-    // Séances planifiées : ~85 % d'assiduité, durée calée sur la dette.
+    // Séances planifiées : ~85 % d’assiduité, durée calée sur la dette.
     const isSlot = scheduled.has(wd);
     const attends = lastSlots.includes(date) || (isSlot && rand() < 0.8);
     const extra = !isSlot && rand() < 0.05;
@@ -92,7 +92,7 @@ export function generateDemo(todayDate: ISODate, weeks = 9): Entry[] {
         duration,
         activity: pick(ACTIVITY_MIX),
         standard: s.standardDuration,
-        note: duration >= 90 ? "Grosse séance 💪" : undefined,
+        note: duration >= 90 ? "Grosse séance" : undefined,
         createdAt: stamp(date),
       });
       balance = Math.max(0, balance - Math.max(0, duration - s.standardDuration));

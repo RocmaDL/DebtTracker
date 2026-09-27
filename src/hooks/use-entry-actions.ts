@@ -7,7 +7,7 @@ import { today } from "@/lib/dates";
 import { useApp } from "@/lib/store";
 import type { Entry } from "@/lib/types";
 
-/** Enregistrement / suppression d'entrées avec retours visuels (toasts, confettis, annulation). */
+/** Enregistrement / suppression d’entrées avec retours visuels (toasts, confettis, annulation). */
 export function useEntryActions() {
   const addEntry = useApp((s) => s.addEntry);
   const updateEntry = useApp((s) => s.updateEntry);
@@ -27,13 +27,11 @@ export function useEntryActions() {
 
     if (before > 0 && after === 0) {
       celebrate();
-      toast.success("Dette soldée !", { description: "Ardoise propre. Profite, tu l'as mérité." });
+      toast.success("Dette soldée !", { description: "Ardoise propre. Profite, tu l’as mérité." });
       return;
     }
-    if (isEdit) {
-      toast.success("Modification enregistrée");
-      return;
-    }
+    // Une modification est visible à l’écran : pas de toast de célébration.
+    if (isEdit) return;
     if (entry.kind === "expense") {
       toast("Dépense ajoutée", {
         description: `+${after - before} min de dette · total ${after} min`,

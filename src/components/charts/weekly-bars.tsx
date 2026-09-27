@@ -96,7 +96,7 @@ export function WeeklyBars({ weeks, target, height = 220 }: WeeklyBarsProps) {
       )}
       {active && hover !== null && (
         <div
-          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-ink-750/95 px-3 py-2 text-xs shadow-xl backdrop-blur"
+          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-ink-750/95 px-3 py-2 text-xs shadow-xl backdrop-blur"
           style={{ left: Math.min(Math.max(PAD.left + band * hover + band / 2, 80), width - 80) }}
         >
           <p className="font-semibold text-fg tabular-nums">{formatDuration(active.minutes)}</p>

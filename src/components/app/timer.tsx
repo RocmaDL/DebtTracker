@@ -13,6 +13,7 @@ import { useDerived } from "@/hooks/use-derived";
 import { useEntryActions } from "@/hooks/use-entry-actions";
 import { Button } from "../ui/button";
 import { ProgressRing } from "../ui/progress-ring";
+import { PixelIcon, activityIcon } from "@/components/ui/pixel-icon";
 
 function useElapsed(startedAt: number | undefined) {
   const [now, setNow] = useState(() => Date.now());
@@ -42,7 +43,7 @@ export function TimerLayer() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 40, opacity: 0 }}
           onClick={() => setExpanded(true)}
-          className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-full border border-volt/30 bg-ink-850/95 py-2 pr-4 pl-2 shadow-[0_10px_40px_-10px_rgb(212_255_58/0.4)] backdrop-blur lg:bottom-6"
+          className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-full border border-volt/30 bg-ink-850/95 py-2 pr-4 pl-2 backdrop-blur lg:bottom-6"
           aria-label="Afficher le chrono en cours"
         >
           <span className="relative grid size-8 place-items-center rounded-full bg-volt/15">
@@ -70,7 +71,7 @@ function TimerScreen({ elapsed, onMinimize }: { elapsed: number; onMinimize: () 
   const progress = elapsed / targetSec;
   const minutes = Math.floor(elapsed / 60);
   const phase =
-    elapsed >= targetSec ? "Objectif atteint 🔥" : elapsed >= standardSec ? "Tu rembourses ta dette" : "Échauffement → séance standard";
+    elapsed >= targetSec ? "Objectif atteint" : elapsed >= standardSec ? "Tu rembourses ta dette" : "Échauffement → séance standard";
   const repaying = Math.max(0, minutes - settings.standardDuration);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ function TimerScreen({ elapsed, onMinimize }: { elapsed: number; onMinimize: () 
 
   const finish = () => {
     if (minutes < 1) {
-      toast.error("Séance trop courte", { description: "Il faut au moins une minute pour l'enregistrer." });
+      toast.error("Séance trop courte", { description: "Il faut au moins une minute pour l’enregistrer." });
       return;
     }
     save({
@@ -108,11 +109,7 @@ function TimerScreen({ elapsed, onMinimize }: { elapsed: number; onMinimize: () 
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-ink-950"
     >
-      <div className="bg-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
-      <div
-        className="pointer-events-none absolute top-1/2 left-1/2 size-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25 blur-3xl transition-colors duration-1000"
-        style={{ background: elapsed >= standardSec ? "var(--color-volt)" : "var(--color-sky)" }}
-      />
+      <div className="led-matrix pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
       <header className="relative flex items-center justify-between p-4 pt-[max(1rem,env(safe-area-inset-top))]">
         <Button variant="ghost" size="sm" onClick={onMinimize}>
@@ -127,12 +124,12 @@ function TimerScreen({ elapsed, onMinimize }: { elapsed: number; onMinimize: () 
           onClick={() => (confirmCancel ? cancelTimer() : setConfirmCancel(true))}
           onBlur={() => setConfirmCancel(false)}
         >
-          <X className="size-4" /> {confirmCancel ? "Confirmer ?" : "Abandonner"}
+          <X className="size-4" /> {confirmCancel ? "Confirmer ?" : "Abandonner"}
         </Button>
       </header>
 
       <main className="relative flex flex-1 flex-col items-center justify-center gap-8 px-6">
-        <ProgressRing value={progress} size={300} stroke={10} tone={elapsed >= standardSec ? "volt" : "amber"} label="Progression vers l'objectif" className="max-sm:scale-90">
+        <ProgressRing value={progress} size={300} stroke={10} tone={elapsed >= standardSec ? "volt" : "amber"} label="Progression vers l’objectif" className="max-sm:scale-90">
           <div className="text-center">
             <p className="font-pixel text-[4.2rem] leading-none tabular-nums" aria-live="off">
               {formatClock(elapsed)}
@@ -169,7 +166,7 @@ function TimerScreen({ elapsed, onMinimize }: { elapsed: number; onMinimize: () 
                 timer.activity === a ? "border-volt/50 bg-volt/10 text-fg" : "border-white/8 text-fg-muted hover:text-fg",
               )}
             >
-              <span aria-hidden>{ACTIVITIES[a].emoji}</span>
+              <PixelIcon name={activityIcon(a)} className="size-3.5" />
               {ACTIVITIES[a].label}
             </button>
           ))}

@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 
 const COLORS = ["#d4ff3a", "#e6ff8f", "#ffffff", "#ffb547", "#6ad7ff"];
 
-/** Pluie de confettis — ignorée si l'utilisateur préfère réduire les animations. */
+/** Pluie de confettis — ignorée si l’utilisateur préfère réduire les animations. */
 export function celebrate() {
   if (typeof window === "undefined") return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
